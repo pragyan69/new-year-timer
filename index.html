@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New year timer</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+
+        }
+        body{
+           background:url(nature.jpeg);
+        background-image: no-repeat;
+           background-size:cover;
+           height:100vh;
+           width:100vw;
+           display:flex;
+           justify-content: center;
+           align-items: center;
+           color:white;
+        }
+
+        .container{
+            height:70vh;
+            width:70vw;
+            background:rgba(green, black,black, 0.7);
+            border-radius:10px;
+            box-shadow: -2px -2px 5px 11px rgba(white,white, white,0.7);
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction:column ;
+        }
+        .container .timerContainer{
+            display:flex;
+            margin:20px
+            
+        }
+        #h1{
+            font-size:50px
+        }
+
+        .timer{
+            margin: 0 20px;
+            font-size:40px;
+
+            text-align:center
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="h1"> New Year timer</h1>
+        <div class = "timerContainer">
+          <div class="timer">
+            <h3 id="days">00</h3>
+                <p>days</p>
+         </div>
+          <div class="timer">
+            <h3 id="hour">00</h3>
+                <p>hour</p>
+         </div>
+          <div class="timer">
+            <h3 id="minute">00</h3>
+                <p>minute</p>
+          </div>
+          <div class="timer">
+            <h3 id="second">00</h3>
+                <p>second</p>
+         </div>
+    </div>
+</div>
+
+<script>
+    const days = document.getElementById("days");
+    const hour = document.getElementById("hour");
+    const minute = document.getElementById("minute");
+    const second = document.getElementById("second");
+
+    const currentYear = new Date().getFullYear();
+    const newYearTIme = new Date(`January 1 ${currentYear +1} 00:00:00`);
+
+    function updateTime(){
+        const currentTime = new Date();
+        const TimeLeft = newYearTIme - currentTime;
+         console.log(TimeLeft);
+
+        // till here we are gettting the time left in seconds 
+        // now we have to update the time in day , hours , minutes
+        const d = Math.floor(TimeLeft/1000/60/60/24);
+        const h = Math.floor(TimeLeft/1000/60/60)%24;
+        const m = Math.floor(TimeLeft/1000/60)%60;
+        const s = Math.floor(TimeLeft/1000)%60;
+        days.innerHTML = d;
+    hour.innerHTML = h<10?"0"+h:h;
+    minute.innerHTML = m<10?"0"+m:m;
+    second.innerHTML = s<10?"0"+s:s;
+    }
+
+    setInterval(updateTime , 1000);
+    
+</script>
+</body>
+</html>
